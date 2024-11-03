@@ -27,7 +27,7 @@ app.use(cors())
 app.use(cookieParser())
 
 // Define routes
-app.use('/rh-services/api/users', userRoutes)
+app.use('/krysto-io/api/users', userRoutes)
 
 
 
