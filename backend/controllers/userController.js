@@ -32,30 +32,56 @@ const authUser = asyncHandler(async (req, res) => {
 // @route POST /api/users
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
-  // Extraction de lastname en plus des autres champs
+  // Extraction des informations du nouvel utilisateur
   const { name, lastname, email, password } = req.body;
 
-  // Vérifier si l'utilisateur existe déjà
+  // Vérifie si l'utilisateur existe déjà
   const userExist = await User.findOne({ email });
   if (userExist) {
     res.status(400);
     throw new Error('Cet utilisateur existe déjà');
   }
 
-  // Création du nouvel utilisateur avec lastname
+  // Crée un nouvel utilisateur
   const user = await User.create({
     name,
-    lastname, // Ajout de lastname ici
+    lastname,
     email,
     password,
   });
 
   if (user) {
+    // Génère un token pour l'utilisateur
     generateToken(res, user._id);
+
+    // Envoi de l'email de bienvenue
+    const message = `
+      Bonjour ${name} ${lastname},
+      
+      Bienvenue sur notre plateforme ! Nous sommes ravis de vous accueillir.
+      
+      Si vous avez des questions ou avez besoin d'aide, n'hésitez pas à nous contacter.
+
+      Cordialement,
+      L'équipe Krysto.io
+    `;
+
+    try {
+      await sendEmail({
+        email: user.email,
+        subject: 'Bienvenue sur Krysto.io!',
+        message,
+      });
+      console.log(`Email de bienvenue envoyé à ${user.email}`);
+    } catch (error) {
+      console.error(`Erreur lors de l'envoi de l'email : ${error.message}`);
+    }
+
+    // Répond avec les informations de l'utilisateur
     res.status(201).json({
       _id: user._id,
       name: user.name,
-      lastname: user.lastname, // Assurez-vous que lastname est bien inclus ici aussi
+      lastname: user.lastname,
       email: user.email,
       isAdmin: user.isAdmin,
       role: user.role,
@@ -65,6 +91,7 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error('Données invalides');
   }
 });
+
 
 
 // @desc Logout user / clear cookie
