@@ -1,10 +1,18 @@
-import React from 'react';
+import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./index.css";
+import ScrollToTop from "./components/utils/ScrollToTop";
+import { Outlet } from "react-router-dom";
 
 const App = () => {
   return (
-    <div className='bg-blue-200' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', textAlign: 'center' }}>
-      <h1>Welcome to Krysto IO test</h1>
-      <p style={{ fontSize: '1.5em', color: '#555' }}>Site en construction 🚧</p>
+    <div>
+      <ScrollToTop />
+      <div className="app">
+        <Outlet />
+      </div>
+      <ToastContainer />
     </div>
   );
 };
