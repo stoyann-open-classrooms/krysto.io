@@ -16,6 +16,8 @@ import PrivateRoutes from "./components/utils/PrivateRoutes.jsx";
 import AdminRoutes from "./components/utils/AdminRoutes.jsx";
 import UserRoutes from "./components/utils/UserRoutes.jsx";
 import LoginScreen from "./screens/site/LoginScreen.jsx";
+import AdminDashboard from "./screens/admin/AdminDashboard.jsx";
+import AdminUsersScreen from "./screens/admin/AdminUsersScreen.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +34,8 @@ const router = createBrowserRouter(
       {/* Admin Routes */}
       <Route path="/" element={<AdminRoutes />}>
         {/* Routes spécifiques aux administrateurs */}
+      <Route path="/admin-dashboard" element={<AdminDashboard/>} />
+      <Route path="/admin-users" element={<AdminUsersScreen/>} />
       </Route>
 
       {/* User Routes */}
