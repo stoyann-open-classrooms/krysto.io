@@ -40,6 +40,14 @@ app.use(cors({
 // Cookie parser middleware
 app.use(cookieParser())
 
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Authorization, Content-Type, Accept');
+  res.sendStatus(204); // Répondre avec un statut 204 No Content
+});
+
+
 // Define routes
 app.use('/users', userRoutes)
 
