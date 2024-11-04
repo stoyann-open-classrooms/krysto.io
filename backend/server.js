@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }))
 
 
  app.use(cors({
-  origin: 'https://api.krysto.io', // Autoriser les requêtes de ce domaine
+  origin: 'https://krysto.io', // Autoriser les requêtes de ce domaine
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Autoriser ces méthodes
   allowedHeaders: ['Authorization', 'Content-Type', 'Accept'] // Autoriser ces en-têtes
 }));
