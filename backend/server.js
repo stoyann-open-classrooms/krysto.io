@@ -24,11 +24,18 @@ app.use(express.urlencoded({ extended: true }))
 //  app.use(cors())
 
 
- app.use(cors({
-  origin: 'https://krysto.io', // Autoriser les requêtes de ce domaine
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Autoriser ces méthodes
-  allowedHeaders: ['Authorization', 'Content-Type', 'Accept'] // Autoriser ces en-têtes
+//  app.use(cors({
+//   origin: 'https://krysto.io', // Autoriser les requêtes de ce domaine
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Autoriser ces méthodes
+//   allowedHeaders: ['Authorization', 'Content-Type', 'Accept'] // Autoriser ces en-têtes
+// }));
+
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Authorization', 'Content-Type', 'Accept']
 }));
+
 
 // Cookie parser middleware
 app.use(cookieParser())
